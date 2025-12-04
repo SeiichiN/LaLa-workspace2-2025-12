@@ -11,6 +11,7 @@ public class Cleric {
 	static final int MAX_HP = 100;
 	int mp = 10;
 	static final int MAX_MP = 50;
+	Random rnd = new Random();
 	
 	/**
 	 * 祈った秒数をもとにMPを回復する
@@ -19,8 +20,7 @@ public class Cleric {
 	 */
 	public int pray(int sec) {
 		int nowMp = this.mp;
-		Random rnd = new Random();
-		int recovery = sec * rnd.nextInt(3);
+		int recovery = sec * (1 + rnd.nextInt(3));
 		int newMp = Math.min(nowMp + recovery, MAX_MP);
 		System.out.println(this.name + "は" + sec + "秒祈った");
 		System.out.println("MPが" + (newMp - nowMp) + "回復した");
