@@ -21,7 +21,7 @@ public class Cleric {
 		int nowMp = this.mp;
 		Random rnd = new Random();
 		int recovery = sec * rnd.nextInt(3);
-		int newMp = Math.min(nowMp + recovery, MAX_MP);
+		int newMp = Math.min(nowMp + recovery, Cleric.MAX_MP);
 		System.out.println(this.name + "は" + sec + "秒祈った");
 		System.out.println("MPが" + (newMp - nowMp) + "回復した");
 		return newMp - nowMp;
@@ -29,7 +29,7 @@ public class Cleric {
 	
 	public void selfAid() {
 		this.mp -= 5;
-		this.hp = MAX_HP;
+		this.hp = Cleric.MAX_HP;
 		System.out.println
 		  (this.name + "はセフルエイドという魔法を使った");
 		System.out.println("HPが回復した");
