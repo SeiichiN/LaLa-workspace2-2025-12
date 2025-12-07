@@ -4,16 +4,25 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Scanner;
 
 public class CalcAgeNew {
+	public static final DateTimeFormatter DTF = 
+			DateTimeFormatter.ofPattern("yyyy/MM/dd")
+				.withResolverStyle(ResolverStyle.STRICT);
+	public static final Scanner SC = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		System.out.println("誕生日を入力してください (yyyy/MM/dd)");
-		String birth = new Scanner(System.in).nextLine();
+		String birth = SC.nextLine();
 		LocalDate birthday = getDate(birth);
 		if (birthday == null) {
 			System.out.println("日付を正しく入力してください");
+			return;
+		}
+		if (birthday.isAfter(LocalDate.now())) {
+			System.out.println("未来の日付は指定できません");
 			return;
 		}
 		int age = getAge(birthday);
@@ -22,20 +31,15 @@ public class CalcAgeNew {
 	}
 	
 	private static int getAge(LocalDate birthday) {
-		LocalDate today = LocalDate.now();
-		int age = Period.between(birthday, today).getYears();
-		return age;
+		return Period.between(birthday, LocalDate.now()).getYears();
 	}
 	
 	private static LocalDate getDate(String dateTxt) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-		LocalDate d = null;
 		try {
-			d = LocalDate.parse(dateTxt, dtf);
+			return LocalDate.parse(dateTxt, DTF);
 		} catch (DateTimeParseException e) {
 			return null;
 		}
-		return d;
 	}
 
 }
