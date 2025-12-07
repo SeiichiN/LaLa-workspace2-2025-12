@@ -6,12 +6,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
-		
-		String date1 = "2025/2/29";
+		System.out.println("誕生日を入力してください (yyyy/MM/dd)");
+		String date1 = new Scanner(System.in).nextLine();
 		if (isValidDateNew(date1)) {
 			System.out.println("正しい日付です");
 		} else {
