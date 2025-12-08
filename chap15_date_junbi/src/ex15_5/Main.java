@@ -7,8 +7,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		LocalDate today = LocalDate.now();
-		int day = today.getDayOfMonth();
-		LocalDate d = today.plusDays(day + 100);
+		LocalDate d = today.plusDays(100);
 		DateTimeFormatter dtf = 
 				DateTimeFormatter.ofPattern("西暦yyyy年MM月dd日");
 		String dateTxt = d.format(dtf);
