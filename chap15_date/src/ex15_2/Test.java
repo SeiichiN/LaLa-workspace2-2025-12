@@ -11,7 +11,7 @@ public class Test {
 
 	public static String makePathName(String folder, String file) {
 		if (folder.endsWith("\\")) {
-			folder.replace("\\", "");
+			folder = folder.replace("\\", "");
 		}
 		return folder + "\\" + file;
 	}

@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class AgeCalculatorWithTime {
 	public static final DateTimeFormatter DTF = 
-			DateTimeFormatter.ofPattern("yyyy/MM/dd")
+			DateTimeFormatter.ofPattern("uuuu/MM/dd")
 				.withResolverStyle(ResolverStyle.STRICT);
 	public static final Scanner SC = new Scanner(System.in);
 
