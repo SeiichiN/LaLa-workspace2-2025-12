@@ -1,6 +1,6 @@
 package main;
 
-import util.Utility;
+import tools.Utility;
 
 public class MoveCharImpl implements MoveChar {
 	GameManager gm;

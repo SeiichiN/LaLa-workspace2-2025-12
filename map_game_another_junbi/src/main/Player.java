@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import util.InputUtil;
-import util.Utility;
+import tools.Factory;
+import tools.InputUtil;
+import tools.Utility;
 
 public class Player {
 	public String name = "プレイヤー";
@@ -27,9 +28,8 @@ public class Player {
 	}
 	
 	private void setRandomPos() {
-		Random r = new Random();
-		py = r.nextInt(gm.YSIZE);
-		px = r.nextInt(gm.XSIZE);
+		py = Utility.RND.nextInt(gm.YSIZE);
+		px = Utility.RND.nextInt(gm.XSIZE);
 	}
 	
 	public void command() {
@@ -101,10 +101,7 @@ public class Player {
 	
 	public void take() {
 		char ch = gm.map[py][px];
-		Item item = null;
-		switch (ch) {
-		case 'p' -> item = new Potion();
-		}
+		Item item = Factory.createItem(ch);
 		if (item == null) return;
 		System.out.println(this.name + "は" + item.name + "を手に入れた!");
 		this.items.add(item);

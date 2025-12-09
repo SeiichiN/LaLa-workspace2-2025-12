@@ -1,4 +1,4 @@
-package util;
+package tools;
 
 public class Const {
 	public static final int YSIZE = 6;

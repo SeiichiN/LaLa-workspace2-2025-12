@@ -1,6 +1,6 @@
 package main;
 
-import util.Utility;
+import tools.Utility;
 
 public abstract class Monster {
 	public String name;

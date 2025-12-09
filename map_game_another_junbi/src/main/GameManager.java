@@ -1,8 +1,9 @@
 package main;
 
-import util.SettingUtil;
-import util.Utility;
-import util.InputUtil;
+import tools.Factory;
+import tools.InputUtil;
+import tools.SettingUtil;
+import tools.Utility;
 
 public class GameManager {
 	public final int YSIZE;
@@ -96,7 +97,7 @@ public class GameManager {
 	
 	public void battle(Player p) {
 		char ch = this.map[p.py][p.px];
-		Monster m = MonsterFactory.createMonster(ch);
+		Monster m = Factory.createMonster(ch);
 		if (m == null) return;
 		System.out.println(m.name + "が現れた!");
 		while (m.hp > 0 && p.hp > 0) {

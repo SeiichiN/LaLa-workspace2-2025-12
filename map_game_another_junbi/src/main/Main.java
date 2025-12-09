@@ -1,6 +1,6 @@
 package main;
 
-import util.ReadSettings;
+import tools.ReadSettings;
 
 public class Main {
 
