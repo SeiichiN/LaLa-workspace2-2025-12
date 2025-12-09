@@ -1,0 +1,39 @@
+アイテムの設計
+
+Itemクラス
+  抽象クラス
+
+フィールド
+  name   :String
+  suffix :char
+
+コンストラクタ
+  引数: char
+        String
+
+
+Potionクラス
+  具象クラス
+  Itemクラスを継承
+
+フィールド
+  recoveryHp :int (初期値 100)
+
+コンストラクタ
+  引数: suffix :char
+        name   :String
+
+コンストラクタ(引数なし)
+  suffix: 'p'
+  name:   "ポーション"
+
+
+Itemクラスを継承するクラスとしては、他にエーテルクラスなどが考えられる。
+エーテルの場合は、MPを回復させることができるようにする可能性が高い。
+したがって、Itemクラスでフィールドに、recoveryHp や rcoveryMp を設定
+することはできない。
+
+
+
+
+;; 修正時刻: Sat 2025/11/22 17:36:56

@@ -1,0 +1,66 @@
+GameManagerクラスにモンスターの移動機能を追加する
+
+GameManagerクラスのマップでは、モンスター達は移動しない。
+このクラスに、モンスターの移動機能を追加する。
+
+ふつうのやり方だと、GameManagerクラスに新しくメソッドを
+追加するのだが、今回は、GameManagerクラスの変更は最小限に
+留めて、新たな機能をもつクラスを作成し、それをGameManager
+クラスに持たせることにする。
+
+新たな機能--ここでは、move()というメソッドとする。
+そして、このメソッドをインターフェースとして定義する。
+
+public interface MoveChar {
+  void move();
+}
+
+この機能を GameManagerクラスに追加するには、フィールドに
+MoveChar型の変数 moveChar を宣言すればよい。
+この変数に moveChar()を実装したクラスのインスタンスを代入
+すればよい。
+
+MoveCharインターフェースを実装したクラスを、MoveCharImpl
+クラスとする。
+
+public class MoveCharImpl implements MoveChar {
+  GameManager gm;
+
+  public MoveCharImpl(GameManager gm) {
+    this.gm = gm;
+  }
+
+  @Override
+  public void move() {
+    // gmのマップ情報を使って char文字を移動する
+    // プログラムを書く。
+  }
+}
+
+このクラスを GameManagerクラスに組み込む。
+
+public class GameManager {
+  ...
+  MoveChar moveChar;
+
+  public GameManager() {
+    this.moveChar = new MoveCharImple(this);
+  }
+
+  // 別の MoveCharインターフェース実装クラスモ組み込める。
+  public void setMoveChar(MoveChar moveChar) {
+    this.moveChar = moveChar;
+  }
+  ...
+}
+
+このことにより、以下のようにすると、char文字が移動する。
+
+  GameManager gm = new GameManager();
+  gm.moveChar.move();
+
+
+
+
+
+;; 修正時刻: Sun 2025/11/23 05:46:00

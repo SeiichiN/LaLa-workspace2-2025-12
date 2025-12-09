@@ -1,0 +1,32 @@
+モンスターの設計
+
+Monsterクラス
+  抽象クラス
+
+フィールド
+  name   :String
+  suffix :char
+  hp     :int
+
+コンストラクタ
+  引数: String
+        char
+
+メソッド
+  attack(Player) -- デフォルトメソッドとしておく。
+
+
+Goblinクラス・Slimeクラス
+  具象クラス
+  Monsterクラスを継承
+
+コンストラクタ
+  引数: String
+        char
+
+メソッド
+  attack(Player) -- これはオーバーライドしなくてもよい。
+
+
+
+;; 修正時刻: Sat 2025/11/22 17:36:56
