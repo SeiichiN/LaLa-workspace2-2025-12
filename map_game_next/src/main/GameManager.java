@@ -1,7 +1,8 @@
 package main;
 
-import java.util.Scanner;
+import java.util.Random;
 
+import util.Factory;
 import util.InputUtil;
 
 public class GameManager {
@@ -9,7 +10,6 @@ public class GameManager {
 	public final int XSIZE;
 	char[][] map;
 	private boolean isEnd = false;
-	public final InputUtil util = new InputUtil();
 	
 	public GameManager(int ysize, int xsize) {
 		this.YSIZE = ysize;
@@ -31,10 +31,11 @@ public class GameManager {
 	}
 	
 	public void setPosition(char c) {
+		Random rnd = new Random();
 		int y, x;
 		do {
-			y = new java.util.Random().nextInt(this.YSIZE);
-			x = new java.util.Random().nextInt(this.XSIZE);
+			y = rnd.nextInt(this.YSIZE);
+			x = rnd.nextInt(this.XSIZE);
 		} while(map[y][x] != '.');
 		map[y][x] = c;		
 	}
@@ -60,29 +61,41 @@ public class GameManager {
 	public boolean isEnd() {
 		return isEnd;
 	}
-
-	public void buttle(Player p) {
+	
+	public void battle(Player p) {
 		char ch = this.map[p.py][p.px];
-		Monster m = MonsterFactory.createMonster(ch);
+		Monster m = Factory.createMonster(ch);
 		if (m == null) return;
-		do {
-			char ch2 = util.getChar("a:攻撃 e:逃げる > ");
-			if (ch2 == 'e') {
+		while (p.hp > 0 && m.hp > 0) {
+			p.attack(m);
+			m.attack(p);
+			System.out.println(p.name + ":" + p.hp + " " + m.name + ":" + m.hp);
+			if (m.hp <= 0) {
+				System.out.println(m.name + " を倒した!");
+				this.map[p.py][p.px] = '.';
+			}
+			if (p.hp <= 0) {
+				System.out.println(p.name + " は倒れた!");
+				this.setEnd(true);
+			}
+			if (isRunAway()) {
 				break;
 			}
-			if (ch2 == 'a') {
-				p.attack(m);
-				m.attack(p);
-				System.out.println(p.name + ":" + p.hp + " " + m.name + ":" + m.hp);
-				if (m.hp <= 0) {
-					System.out.println(m.name + " を倒した!");
-					this.map[p.py][p.px] = '.';
-				}
-				if (p.hp <= 0) {
-					System.out.println(p.name + " は倒れた!");
-					this.setEnd(true);
-				}
+		}
+	}
+	
+	private boolean isRunAway() {
+		while (true) {
+			char ch2 = InputUtil.getChar("a:攻撃 e:逃げる > ");
+			if (ch2 == 'e') {
+				return true;
 			}
-		} while (p.hp > 0 && m.hp > 0);
+			else if (ch2 == 'a') {
+				return false;
+			} else {
+				System.out.println("aかeを入力してください");
+			}
+		}
+		
 	}
 }

@@ -21,7 +21,11 @@ public class InputUtil {
 			if (SC.hasNextInt()) {
 				int num = SC.nextInt();
 				return num;
+			} else {
+				System.out.println("数値を入力してください");
+				SC.next();
 			}
+			
 		}
 	}
 }

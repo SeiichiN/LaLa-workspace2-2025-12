@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import util.Factory;
 import util.InputUtil;
 
 public class Player {
@@ -45,7 +46,7 @@ public class Player {
 		case 's' -> moveDown();
 		case 'a' -> moveLeft();
 		case 'd' -> moveRight();
-		case 'b' -> this.gm.buttle(this);
+		case 'b' -> this.gm.battle(this);
 		case 't' -> take();
 		case 'u' -> use();
 		case 'i' -> status();
@@ -96,8 +97,8 @@ public class Player {
 	private void printItemList() {
 		System.out.print("持ち物 ");
 		if (this.items.size() > 0) {
-			for (Item i : items) {
-				System.out.print(i.name + " ");
+			for (int i = 0; i < items.size(); i++) {
+				System.out.print((i+1) + "." + items.get(i).name + " ");
 			}
 		} else {
 			System.out.print("なし");
@@ -107,7 +108,8 @@ public class Player {
 
 	public void take() {
 		char ch = gm.map[py][px];
-		Item item = ItemFactory.createItem(ch);
+		Item item = Factory.createItem(ch);
+		if (item == null) return;
 		this.items.add(item);
 		System.out.println
 		  (this.name + "は持ち物に" + item.name + "を追加した");
@@ -115,10 +117,8 @@ public class Player {
 	}
 
 	private Item selectItem() {
-		for (int i = 0; i < items.size(); i++) {
-			System.out.print((i+1) + "." + items.get(i).name + " ");
-		}
-		System.out.println();
+		printItemList();
+		if (this.items.size() == 0) return null;
 		int no = InputUtil.getNum("番号で選択してください > ");
 		return items.get(no - 1);
 	}
@@ -142,6 +142,7 @@ public class Player {
 		// 1:ポーション 2:エーテル 3:ポーション
 		// どれを使いますか？ > 
 		Item item = selectItem();
+		if (item == null) return;
 		System.out.println
 		  (this.name + "は" + item.name + "を使った");
 		useItem(item);
