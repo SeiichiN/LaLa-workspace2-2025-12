@@ -2,6 +2,8 @@ package main;
 
 import tools.Factory;
 import tools.InputUtil;
+import tools.MoveChar;
+import tools.MoveCharImpl;
 import tools.SettingUtil;
 import tools.Utility;
 
