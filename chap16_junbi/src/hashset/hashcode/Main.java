@@ -1,4 +1,4 @@
-package hashsset.hashcode;
+package hashset.hashcode;
 
 public class Main {
 
