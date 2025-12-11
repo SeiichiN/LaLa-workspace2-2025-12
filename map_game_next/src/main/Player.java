@@ -23,8 +23,8 @@ public class Player {
 		this.name = "プレーヤー";
 		this.hp = 100;
 		this.mp = 50;
-		py = rnd.nextInt(gm.YSIZE);
-		px = rnd.nextInt(gm.XSIZE);
+		py = rnd.nextInt(Settings.YSIZE);
+		px = rnd.nextInt(Settings.XSIZE);
 	}
 	
 	public void look() {
@@ -34,6 +34,7 @@ public class Player {
 		case 'g' -> "ゴブリンが現れた！";
 		case 's' -> "スライムが現れた！";
 		case 'p' -> "ポーションがあった！";
+		case 'e' -> "エーテルがあった！";
 		default -> "";
 		};
 		System.out.println(s);
@@ -61,7 +62,7 @@ public class Player {
 	
 	private void moveDown() {
 		py++;
-		if (py >= gm.YSIZE) py = gm.YSIZE - 1;
+		if (py >= Settings.YSIZE) py = Settings.YSIZE - 1;
 	}
 	
 	private void moveLeft() {
@@ -71,7 +72,7 @@ public class Player {
 	
 	private void moveRight() {
 		px++;
-		if (px >= gm.XSIZE) px = gm.XSIZE - 1;
+		if (px >= Settings.XSIZE) px = Settings.XSIZE - 1;
 	}
 	
 	public void attack(Monster m) {
@@ -108,7 +109,7 @@ public class Player {
 
 	public void take() {
 		char ch = gm.map[py][px];
-		Item item = Factory.createItem(ch);
+		Item item = gm.factory.createItem(ch);
 		if (item == null) return;
 		this.items.add(item);
 		System.out.println

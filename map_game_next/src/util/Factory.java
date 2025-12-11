@@ -8,7 +8,7 @@ import main.Potion;
 import main.Slime;
 
 public class Factory {
-	public static Item createItem(char type) {
+	public Item createItem(char type) {
 		Item item = switch (type) {
 		case 'p' -> new Potion();
 		case 'e' -> new Ether();
@@ -17,7 +17,7 @@ public class Factory {
 		return item;
 	}
 	
-	public static Monster createMonster(char type) {
+	public Monster createMonster(char type) {
 		Monster m = switch (type) {
 		case 's' -> new Slime();
 		case 'g' -> new Goblin();

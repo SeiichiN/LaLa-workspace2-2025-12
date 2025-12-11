@@ -6,25 +6,18 @@ import util.Factory;
 import util.InputUtil;
 
 public class GameManager {
-	public final int YSIZE;
-	public final int XSIZE;
 	char[][] map;
 	private boolean isEnd = false;
+	Factory factory = new Factory();
 	
-	public GameManager(int ysize, int xsize) {
-		this.YSIZE = ysize;
-		this.XSIZE = xsize;
-		this.map = new char[YSIZE][XSIZE];
+	public GameManager() {
+		this.map = new char[Settings.YSIZE][Settings.XSIZE];
 		initMap();
 	}
 	
-	public GameManager() {
-		this(5, 5);
-	}
-	
 	public void initMap() {
-		for (int y = 0; y < YSIZE; y++) {
-			for (int x = 0; x < XSIZE; x++) {
+		for (int y = 0; y < Settings.YSIZE; y++) {
+			for (int x = 0; x < Settings.XSIZE; x++) {
 				map[y][x] = '.';
 			}
 		}		
@@ -34,16 +27,16 @@ public class GameManager {
 		Random rnd = new Random();
 		int y, x;
 		do {
-			y = rnd.nextInt(this.YSIZE);
-			x = rnd.nextInt(this.XSIZE);
+			y = rnd.nextInt(Settings.YSIZE);
+			x = rnd.nextInt(Settings.XSIZE);
 		} while(map[y][x] != '.');
 		map[y][x] = c;		
 	}
 
 	
 	public void printMap(Player p) {
-		for (int y = 0; y < YSIZE; y++) {
-			for (int x = 0; x < XSIZE; x++) {
+		for (int y = 0; y < Settings.YSIZE; y++) {
+			for (int x = 0; x < Settings.XSIZE; x++) {
 				if (y == p.py && x == p.px) {
 					System.out.print("|" + '@');
 				} else {
@@ -64,7 +57,7 @@ public class GameManager {
 	
 	public void battle(Player p) {
 		char ch = this.map[p.py][p.px];
-		Monster m = Factory.createMonster(ch);
+		Monster m = factory.createMonster(ch);
 		if (m == null) return;
 		while (p.hp > 0 && m.hp > 0) {
 			p.attack(m);

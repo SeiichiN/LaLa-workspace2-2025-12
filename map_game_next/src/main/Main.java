@@ -3,13 +3,13 @@ package main;
 public class Main {
 
 	public static void main(String[] args) {
-		GameManager gm = new GameManager(6,6);
+		GameManager gm = new GameManager();
 
 		gm.setPosition('g');
 		gm.setPosition('g');
 		gm.setPosition('s');
 		gm.setPosition('p');
-		gm.setPosition('p');
+		gm.setPosition('e');
 		Player player = new Player(gm);
 		gm.printMap(player);
 
