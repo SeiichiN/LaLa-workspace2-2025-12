@@ -3,7 +3,7 @@ package main;
 public class Main {
 
 	public static void main(String[] args) {
-		GameManager gm = new GameManager(6,6);
+		GameManager gm = new GameManager();
 
 		gm.setPosition('g');
 		gm.setPosition('g');
