@@ -1,21 +1,26 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
+
+import tools.Factory;
+import tools.InputUtil;
+import tools.Settings;
 
 public class Player {
 	String name;
 	int py;
 	int px;
 	GameManager gm;
+	List<Item> items = new ArrayList<>();
 	Random rnd = new Random();
-	Scanner sc = new Scanner(System.in);
 	
 	public Player(GameManager gm) {
 		this.gm = gm;
 		this.name = "プレーヤー";
-		py = rnd.nextInt(gm.YSIZE);
-		px = rnd.nextInt(gm.XSIZE);
+		py = rnd.nextInt(Settings.YSIZE);
+		px = rnd.nextInt(Settings.XSIZE);
 	}
 	
 	public void look() {
@@ -31,16 +36,25 @@ public class Player {
 	}
 	
 	public void command() {
-		System.out.print
-		  ("wsad:移動 b:戦う t:取る u:使う q:終了 > ");
-		char ch = sc.nextLine().charAt(0);
+		char ch = new InputUtil().getChar
+				("wsad:移動 b:戦う t:取る u:使う q:終了 > ");
+		
 		switch (ch) {
 		case 'w' -> moveUp();
 		case 's' -> moveDown();
 		case 'a' -> moveLeft();
 		case 'd' -> moveRight();
+		case 'b' -> gm.battle(this);
+		case 't' -> take();
 		case 'q' -> endGame();
 		}
+	}
+	
+	public void take() {
+		char ch = this.gm.map[py][px];
+		Item item = Factory.createItem(ch);
+		this.items.add(item);
+		this.gm.map[py][px] = '.';
 	}
 	
 	private void moveUp() {
@@ -50,7 +64,7 @@ public class Player {
 	
 	private void moveDown() {
 		py++;
-		if (py >= gm.YSIZE) py = gm.YSIZE - 1;
+		if (py >= Settings.YSIZE) py = Settings.YSIZE - 1;
 	}
 	
 	private void moveLeft() {
@@ -60,7 +74,7 @@ public class Player {
 	
 	private void moveRight() {
 		px++;
-		if (px >= gm.XSIZE) px = gm.XSIZE - 1;
+		if (px >= Settings.XSIZE) px = Settings.XSIZE - 1;
 	}
 	
 	private void endGame() {
