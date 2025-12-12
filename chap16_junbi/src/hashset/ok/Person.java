@@ -9,6 +9,7 @@ public class Person {
 	
 	@Override
 	public boolean equals(Object obj) {
+        if (this == obj) return true;
 		if (obj instanceof Person p) {
 			return this.name.equals(p.name);
 		}
